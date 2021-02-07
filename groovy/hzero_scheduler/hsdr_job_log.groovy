@@ -45,4 +45,16 @@ databaseChangeLog(logicalFilePath: 'script/db/hsdr_job_log.groovy') {
             column(name: "log_message", type: "longtext", remarks: "日志信息")
         }
     }
+
+    changeSet(author: "shuangfei.zhu@hand-china.com", id: "2020-09-03-hsdr_job_log") {
+        def weight = 1
+        if(helper.isSqlServer()){
+            weight = 2
+        } else if(helper.isOracle()){
+            weight = 3
+        }
+        addColumn(tableName: 'hsdr_job_log') {
+            column(name: "output_file", type: "varchar(" + 480 * weight + ")", remarks: "输出文件")
+        }
+    }
 }

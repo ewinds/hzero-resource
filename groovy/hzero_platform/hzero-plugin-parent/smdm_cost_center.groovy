@@ -15,7 +15,7 @@ databaseChangeLog(logicalFilePath: 'script/db/smdm_cost_center.groovy') {
 
         createTable(tableName: "smdm_cost_center") {
 
-            column(name: "cost_id", type: "BIGINT UNSIGNED", autoIncrement: "true", startWith: "1", remarks: "表ID，主键") {
+            column(name: "cost_id", type: "bigint", autoIncrement: "true", startWith: "1", remarks: "表ID，主键") {
                 constraints(primaryKey: "true", primaryKeyName: "smdm_cost_id_PK")
             }
             column(name: "tenant_id", type: "BIGINT", remarks: "所属租户ID，hpfm_tenant.tenant_id")
@@ -32,9 +32,9 @@ databaseChangeLog(logicalFilePath: 'script/db/smdm_cost_center.groovy') {
             column(name: "control_area", type: "varchar(" + 12 * weight + "))", remarks: "控制范围")
             column(name: "company_code", type: "varchar(" + 12 * weight + "))", remarks: "公司代码")
             column(name: "principal", type: "varchar(" + 60 * weight + "))", remarks: "负责人")
-            column(name: "effective_date", type: "varchar(" + 24 * weight + "))", remarks: "开始生效日期")
-            column(name: "effective_deadline", type: "varchar(" + 24 * weight + "))", remarks: "有效截至日期")
-            column(name: "enabled_flag", type: "varchar(" + 3 * weight + "))", remarks: "标识: 是否标记待删除科目")
+            column(name: "effective_date", type: "DATETIME", remarks: "开始生效日期")
+            column(name: "effective_deadline", type: "DATETIME", remarks: "有效截至日期")
+            column(name: "enabled_flag", type: "tinyint", remarks: "标识: 是否标记待删除科目")
             column(name: "illustration", type: "varchar(" + 3 * weight + "))", remarks: "简要说明")
             column(name: "source_code", type: "varchar(" + 30 * weight + "))", remarks: "数据来源")
             column(name: "external_system_code", type: "varchar(" + 30 * weight + "))", remarks: "外部系统代码")
@@ -71,20 +71,15 @@ databaseChangeLog(logicalFilePath: 'script/db/smdm_cost_center.groovy') {
             column(name: "cost_code")
         }
     }
-    changeSet(author: "liangliang.jiang@hand-china.com", id: "2019-11-14-smdm_cost_center") {
-        modifyDataType(tableName: "smdm_cost_center", columnName: "effective_date", newDataType: "DATETIME")
-        modifyDataType(tableName: "smdm_cost_center", columnName: "effective_deadline", newDataType: "DATETIME")
-        modifyDataType(tableName: "smdm_cost_center", columnName: "enabled_flag", newDataType: "tinyint(1)")
-    }
     changeSet(author: "tingxiu.zhou@hand-china.com",id: "2019-12-05-add_column"){
         addColumn(tableName: "smdm_cost_center"){
-            column(name: "company_id", type: "bigint(20)", remarks: "公司ID")
+            column(name: "company_id", type: "bigint", remarks: "公司ID")
         }
     }
 
     changeSet(author: "tingxiu.zhou@hand-china.com",id: "2019-12-05-add_column-ou_id"){
         addColumn(tableName: "smdm_cost_center"){
-            column(name: "ou_id", type: "bigint(20)", remarks: "业务实体ID")
+            column(name: "ou_id", type: "bigint", remarks: "业务实体ID")
         }
     }
 

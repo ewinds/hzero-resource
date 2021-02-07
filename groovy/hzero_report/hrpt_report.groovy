@@ -46,4 +46,16 @@ databaseChangeLog(logicalFilePath: 'script/db/hrpt_report.groovy') {
             column(name: "async_flag", type: "tinyint", defaultValue: "0",  remarks: "异步标识")  {constraints(nullable:"false")}
         }
     }
+
+    changeSet(author: "hzero@hand-china.com", id: "2020-09-04-hrpt_report") {
+        def weight = 1
+        if(helper.isSqlServer()){
+            weight = 2
+        } else if(helper.isOracle()){
+            weight = 3
+        }
+        addColumn(tableName: 'hrpt_report') {
+            column(name: "export_type", type: "varchar(" + 120 * weight + ")",  remarks: "导出类型")
+        }
+    }
 }

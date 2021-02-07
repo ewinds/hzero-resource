@@ -80,4 +80,14 @@ databaseChangeLog(logicalFilePath: 'script/db/hiam_open_app.groovy') {
             }
         }   
     }
+
+    changeSet(author: "Admin@hand-china.com", id: "hiam_open_app-2021-01-29-version-2") {
+        def weight = 1
+        if(helper.isSqlServer()){
+            weight = 2
+        } else if(helper.isOracle()){
+            weight = 3
+        }
+        modifyDataType (tableName: "hiam_open_app", columnName: "sub_app_id", newDataType: "varchar(" + 120* weight + ")")
+    }
 }

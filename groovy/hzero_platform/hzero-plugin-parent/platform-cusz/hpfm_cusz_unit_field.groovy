@@ -98,4 +98,10 @@ databaseChangeLog(logicalFilePath: 'script/db/hpfm_cusz_unit_field.groovy') {
         addUniqueConstraint(columnNames: "unit_id,field_id,field_code,tenant_id", tableName: "hpfm_cusz_unit_field", constraintName: "hpfm_cusz_unit_field_U1")
     }
 
+    changeSet(author: "xiangyu.qi01@hand-china.com", id: "2020-07-27_hpfm_cusz_unit_field_add_col_span") {
+        addColumn(tableName: 'hpfm_cusz_unit_field') {
+            column(name: "col_span",  type:"int", remarks: "跨列配置")
+        }
+    }
+
 }

@@ -22,5 +22,6 @@ spring:
 installer:
   dataDir: init-data
   groovyDir: groovy
+  fixDir: fix-data
 data:
-  version: 1.4
+  version: 1.5.RELEASE

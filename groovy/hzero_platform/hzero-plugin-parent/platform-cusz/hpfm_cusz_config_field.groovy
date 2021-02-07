@@ -118,4 +118,16 @@ databaseChangeLog(logicalFilePath: 'script/db/hpfm_cusz_config_field.groovy') {
             column(name: "where_option", type: "varchar(" + 30 * weight + ")", remarks: "where条件运算符")
         }
     }
+
+    changeSet(author: "xiangyu.qi01@hand-china.com", id: "2020-07-27_hpfm_cusz_config_field_add_col_span") {
+        addColumn(tableName: 'hpfm_cusz_config_field') {
+            column(name: "col_span",  type:"int", remarks: "跨列配置")
+        }
+    }
+
+    changeSet(author: "xiangyu.qi01@hand-china.com", id: "2020-07-28_hpfm_cusz_config_field_add_sorter") {
+        addColumn(tableName: 'hpfm_cusz_config_field') {
+            column(name: "sorter",  type:"smallint", remarks: "可否排序")
+        }
+    }
 }

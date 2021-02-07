@@ -70,4 +70,9 @@ databaseChangeLog(logicalFilePath: 'script/db/hpfm_cusz_config_field_wdg.groovy'
         }
     }
 
+    changeSet(author: "xiangyu.qi01@hand-china.com", id: "2020-07-27-hpfm_cusz_config_field_wdg-add_column_placeholder"){
+        addColumn(tableName: 'hpfm_cusz_config_field_wdg') {
+            column(name: "placeholder", type: "varchar(" + 225 * weight + ")", remarks: "组件placeholder")
+        }
+    }
 }
